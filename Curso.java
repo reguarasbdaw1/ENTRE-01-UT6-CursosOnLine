@@ -35,13 +35,12 @@ public class Curso
     private String capitalizarNombre(String nombre) {
         String[] separada = nombre.split(" ");
         String str = " ";
-        for(int i = 0; i < separada.length; i++)
+        for(int i = 2; i < separada.length; i++)
         {
             separada[i].substring(0,1).toUpperCase();
 
             str += separada[i];
         }
-
         return str;
 
     }

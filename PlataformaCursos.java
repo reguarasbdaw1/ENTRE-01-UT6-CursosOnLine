@@ -7,7 +7,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
-
+import java.util.Map;
 /**
  * Un objeto de esta clase mantiene una 
  * colección map que asocia  categorías (las claves) con
@@ -119,8 +119,7 @@ public class PlataformaCursos
      */
     public void leerDeFichero() {
 
-        Scanner sc = new Scanner(
-                this.getClass().getResourceAsStream("/cursos.csv"));
+        Scanner sc = new Scanner(this.getClass().getResourceAsStream("/cursos.csv"));
         while (sc.hasNextLine())  {
             String lineaCurso = sc.nextLine().trim();
             int p = lineaCurso.indexOf(SEPARADOR);
@@ -151,8 +150,16 @@ public class PlataformaCursos
      *  
      */
     public TreeSet<String> obtenerCategorias() {
-
-        return null;
+        TreeSet<String> categorias = new TreeSet();
+        Set<Map.Entry<String, ArrayList<Curso>>> conjuntoEntrada = plataforma.entrySet();
+        Iterator <Map.Entry<String, ArrayList<Curso>>> it = conjuntoEntrada.iterator();
+        while(it.hasNext())
+        {
+            Map.Entry <String , ArrayList<Curso>> entrada = it.next();
+            String llave = entrada.getKey();
+            categorias.add(llave);
+        }
+        return categorias;
 
     }
 
@@ -192,45 +199,45 @@ public class PlataformaCursos
      */
 
     public String cursoMasAntiguo() {
-
+        
         return "";
     }
 
-    // /**
-    // *  
-    // */
-    // public static void main(String[] args) {
+    /**
+     *  
+     */
+    public static void main(String[] args) {
 
-    // PlataformaCursos plataforma = new PlataformaCursos();
-    // plataforma.leerDeFichero();
-    // plataforma.escribir();
+        PlataformaCursos plataforma = new PlataformaCursos();
+        plataforma.leerDeFichero();
+        plataforma.escribir();
 
-    // System.out.println(
-    // "Curso más antiguo: " + plataforma.cursoMasAntiguo()
-    // + "\n");
+        System.out.println(
+            "Curso más antiguo: " + plataforma.cursoMasAntiguo()
+            + "\n");
 
-    // String categoria = "bases de datos";
-    // Nivel nivel = Nivel.AVANZADO;
-    // System.out.println("------------------");
-    // System.out.println(
-    // "Borrando cursos de " + categoria.toUpperCase()
-    // + " y nivel "
-    // + nivel);
-    // TreeSet<String> borrados = plataforma.borrarCursosDe(categoria, nivel);
+        String categoria = "bases de datos";
+        Nivel nivel = Nivel.AVANZADO;
+        System.out.println("------------------");
+        System.out.println(
+            "Borrando cursos de " + categoria.toUpperCase()
+            + " y nivel "
+            + nivel);
+        TreeSet<String> borrados = plataforma.borrarCursosDe(categoria, nivel);
 
-    // System.out.println("Borrados " + " = " + borrados.toString() + "\n");
-    // categoria = "cms";
-    // nivel = Nivel.INTERMEDIO;
-    // System.out.println(
-    // "Borrando cursos de " + categoria.toUpperCase()
-    // + " y nivel "
-    // + nivel);
-    // borrados = plataforma.borrarCursosDe(categoria, nivel);
-    // System.out.println("Borrados " + " = " + borrados.toString() + "\n");
-    // System.out.println("------------------\n");
-    // System.out.println(
-    // "Después de borrar ....");
-    // plataforma.escribir();
+        System.out.println("Borrados " + " = " + borrados.toString() + "\n");
+        categoria = "cms";
+        nivel = Nivel.INTERMEDIO;
+        System.out.println(
+            "Borrando cursos de " + categoria.toUpperCase()
+            + " y nivel "
+            + nivel);
+        borrados = plataforma.borrarCursosDe(categoria, nivel);
+        System.out.println("Borrados " + " = " + borrados.toString() + "\n");
+        System.out.println("------------------\n");
+        System.out.println(
+            "Después de borrar ....");
+        plataforma.escribir();
 
-    // }
+    }
 }
